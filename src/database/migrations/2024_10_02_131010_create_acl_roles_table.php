@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shop_product_images', function (Blueprint $table) {
+        Schema::create('acl_roles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_id')->unsigned();
-            $table->text('image');
+            $table->string('name', 500);
+            $table->string('display_name', 500);
+            $table->string('guard_name', 500);
             $table->timestamps();
-
-            // References
-            $table->foreign('product_id')
-                ->references('id')
-                ->on('shop_products');
         });
     }
 
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shop_product_images');
+        Schema::dropIfExists('acl_roles');
     }
 };

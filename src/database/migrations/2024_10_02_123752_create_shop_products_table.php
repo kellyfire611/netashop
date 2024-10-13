@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('shop_products', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id'); // bigIncrement - số nguyên không dấu tự tăng
             $table->string('product_code', 50);
             $table->text('product_name', 500);
             $table->text('image');
             $table->text('short_description', 250);
             $table->mediumText('description');
-            $table->decimal('standard_cost');
-            $table->decimal('list_price');
-            $table->integer('quantity_per_unit');
+            $table->decimal('standard_code', 16, 0); //giá niêm yết
+            $table->decimal('list_price', 16, 0); //giá nhập
+            $table->text('quantity_per_unit');
             $table->boolean('discontinued');
             $table->boolean('is_featured');
             $table->boolean('is_new');
@@ -28,13 +28,8 @@ return new class extends Migration
             $table->bigInteger('supplier_id')->unsigned();
             $table->timestamps();
 
-            // References
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('shop_categories');
-            $table->foreign('supplier_id') 
-                ->references('id')
-                ->on('shop_suppliers');
+            $table->foreign('category_id')->references('id')->on('shop_categories');
+            $table->foreign('supplier_id')->references('id')->on('shop_suppliers');
         });
     }
 

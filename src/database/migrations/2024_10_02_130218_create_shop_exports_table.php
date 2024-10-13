@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shop_categories', function (Blueprint $table) {
+        Schema::create('shop_exports', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('category_code', 50);
-            $table->text('category_text', 500);
-            $table->text('description');
-            $table->text('image');
+            $table->bigInteger('store_id')->unsigned();
+            $table->bigInteger('employee_id')->unsigned();
+            $table->dateTime('export_date');
             $table->timestamps();
+
+            $table->foreign('store_id')->references('id')->on('shop_stores');
+            $table->foreign('employee_id')->references('id')->on('acl_users');
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shop_categories');
+        Schema::dropIfExists('shop_exports');
     }
 };

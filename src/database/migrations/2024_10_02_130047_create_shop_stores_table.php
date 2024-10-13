@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shop_suppliers', function (Blueprint $table) {
-            $table->bigIncrements('id'); //ubsigned big int, auto increments
-            $table->string('supplier_code', 50);
-            $table->text('supplier_text', 500);
+        Schema::create('shop_stores', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('store_code', 50);
+            $table->string('store_name', 500);
             $table->text('description');
             $table->text('image');
             $table->timestamps();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shop_suppliers');
+        Schema::dropIfExists('shop_stores');
     }
 };
