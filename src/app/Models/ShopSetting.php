@@ -9,7 +9,7 @@ class ShopSetting extends Model
 {
     use HasFactory;
 
-    protected $table = 'shop_setting';
+    protected $table = 'shop_settings';
     protected $fillable = [
         'group',
         'key',
