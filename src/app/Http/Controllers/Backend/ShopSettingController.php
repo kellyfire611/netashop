@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ShopSetting;
+use Validator;
 
 class ShopSettingController extends Controller
 {
@@ -23,6 +24,29 @@ class ShopSettingController extends Controller
 
     // action Store: lưu dữ liệu vào database
     public function store(Request $request) {
+        // Kiểm tra tính hợp lệ của dữ liệu gởi đến
+        $validator = Validator::make($request->all(), [
+            'group' => 'required|min:3|max:50',
+            'key' => 'required',
+            'value' => 'required',
+        ], 
+        // messages
+        [
+            'group.required' => 'Tên nhóm bắt buộc nhập.',
+            'group.min' => 'Tên nhóm phải từ 3 ký tự trở lên.',
+            'group.max' => 'Tên nhóm phải ít hơn 50 ký tự.',
+            'key.required' => 'Từ khóa bắt buộc nhập',
+            'value.required' => 'Giá trị bắt buộc nhập',
+        ]);
+
+        // Xử lý logic chuyển hướng hay là tiến hành lưu
+        if($validator->fails()) {
+            return redirect(route('backend.shop_settings.create'))
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        //
         $newModel = new ShopSetting();
         $newModel->group = $request->group;
         $newModel->key = $request->key;

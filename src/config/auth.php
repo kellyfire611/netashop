@@ -60,9 +60,15 @@ return [
     */
 
     'providers' => [
+        // 'users' => [
+        //     'driver' => 'eloquent',
+        //     'model' => env('AUTH_MODEL', App\Models\User::class),
+        // ],
+
+        // Thay thế việc xác thực tài khoản bằng model `AclUser`
         'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'driver' => 'custom',
+            'model' => App\Models\AclUser::class,
         ],
 
         // 'users' => [

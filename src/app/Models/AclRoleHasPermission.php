@@ -20,6 +20,7 @@ class AclRoleHasPermission extends Model
     protected $primaryKey = 'id';
     protected $dates = [];
     protected $dateFormat = 'Y-m-d H:i:s';
+    public $timestamps = false;
 
     public function role() {
         return $this->belongsTo(AclRole::class,

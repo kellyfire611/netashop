@@ -7,6 +7,99 @@ use App\Models\AclPermission;
 use App\Models\AclUserHasRole;
 use App\Models\AclRoleHasPermission;
 use App\Http\Controllers\Backend\ShopSettingController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Backend\ShopPostController;
+use App\Http\Controllers\Backend\AclUserHasRoleController;
+use App\Http\Controllers\Backend\AclRoleHasPermissionController;
+use App\Http\Controllers\Api\AclRoleHasPermissionController as ApiAclRoleHasPermissionController;
+
+// AUTH
+Route::get('/active-user',
+    [RegisterController::class, 'activeUser'])
+    ->name('auth.register.active-user');
+
+Route::get('/register-success',
+    [RegisterController::class, 'registerSuccess'])
+    ->name('auth.register.register-success');
+Route::post('/register',
+    [RegisterController::class, 'register'])
+    ->name('auth.register.register');
+
+Route::get('/register', 
+    [RegisterController::class, 'index'])
+    ->name('auth.register.index');
+
+Route::get('/login',
+    [LoginController::class, 'index'])
+    ->name('auth.login.index');
+Route::post('/login',
+    [LoginController::class, 'login'])
+    ->name('auth.login.login');
+Route::post('/logout',
+    [LoginController::class, 'logout'])
+    ->name('auth.login.logout');
+
+// BACKEND
+// --- Route chức năng Role_has_permissions
+Route::get('/api/v1/acl_role_has_permissions/getByRoleId/{role_id?}',
+    [ApiAclRoleHasPermissionController::class, 'getByRoleId'])
+    ->name('api.acl_role_has_permissions.getByRoleId');
+
+Route::get('/backend/cap-quyen-cho-vai-tro',
+    [AclRoleHasPermissionController::class, 'index'])
+    ->name('backend.acl_role_has_permissions.index');
+
+Route::get('/backend/cap-quyen-cho-vai-tro/create',
+    [AclRoleHasPermissionController::class, 'create'])
+    ->name('backend.acl_role_has_permissions.create');
+
+Route::post('/backend/cap-quyen-cho-vai-tro/create',
+    [AclRoleHasPermissionController::class, 'store'])
+    ->name('backend.acl_role_has_permissions.store');
+
+// --- Route chức năng User_has_roles
+Route::post('/backend/gan-vai-tro-cho-nguoi-dung/create',
+    [AclUserHasRoleController::class, 'store'])
+    ->name('backend.acl_user_has_roles.store');
+
+Route::get('/backend/gan-vai-tro-cho-nguoi-dung/{username}/create',
+    [AclUserHasRoleController::class, 'create_with_username'])
+    ->name('backend.acl_user_has_roles.create_with_username');
+
+Route::get('/backend/gan-vai-tro-cho-nguoi-dung/create',
+    [AclUserHasRoleController::class, 'create'])
+    ->name('backend.acl_user_has_roles.create');
+
+Route::get('/backend/gan-vai-tro-cho-nguoi-dung',
+    [AclUserHasRoleController::class, 'index'])
+    ->name('backend.acl_user_has_roles.index');
+
+// --- 
+
+Route::get('/backend/bai-viet/create',
+    [ShopPostController::class, 'create'])
+    ->name('backend.shop_posts.create');
+
+Route::post('/backend/bai-viet/store',
+    [ShopPostController::class, 'store'])
+    ->name('backend.shop_posts.store');
+
+Route::delete('/backend/bai-viet/{id}',
+    [ShopPostController::class, 'destroy'])
+    ->name('backend.shop_posts.destroy');
+
+Route::get('/backend/bai-viet/{id}',
+    [ShopPostController::class, 'edit'])
+    ->name('backend.shop_posts.edit');
+
+Route::put('/backend/bai-viet/{id}',
+    [ShopPostController::class, 'update'])
+    ->name('backend.shop_posts.update');
+
+Route::get('/backend/bai-viet',
+    [ShopPostController::class, 'index'])
+    ->name('backend.shop_posts.index');
 
 Route::get('/backend/cau-hinh', 
     [ShopSettingController::class, 'index'])
@@ -36,7 +129,7 @@ Route::delete('/backend/cau-hinh/{id}',
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/test-model-acl-user', function() {
     $lstUsers = AclUser::all();

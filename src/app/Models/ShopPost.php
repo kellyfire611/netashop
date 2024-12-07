@@ -31,6 +31,10 @@ class ShopPost extends Model
         'created_at',
         'updated_at',
     ];
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
     protected $dateFormat = 'Y-m-d H:i:s';
 
     public function post_category() {

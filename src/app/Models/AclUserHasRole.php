@@ -20,6 +20,7 @@ class AclUserHasRole extends Model
     protected $primaryKey = 'id';
     protected $dates = [];
     protected $dateFormat = 'Y-m-d H:i:s';
+    public $timestamps = false;
 
     public function user() {
         return $this->belongsTo(AclUser::class,
