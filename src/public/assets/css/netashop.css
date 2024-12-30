@@ -1,3 +1,17 @@
 * {
   font-family: "Nunito Sans", sans-serif !important;
 }
+
+.hinh-anh-dai-dien {
+  width: 120px;
+}
+
+.gia-ban-co-loi {
+  color: blue;
+}
+.gia-ban-hue-von {
+  color: #000;
+}
+.gia-ban-lo-von {
+  color: red;
+}

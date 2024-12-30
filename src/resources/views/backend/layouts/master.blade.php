@@ -89,6 +89,8 @@
     <div class="main-content">
 
       <div class="page-content">
+        @include('backend.layouts.partials.error-messages')        
+
         @yield('main-content')
         <!-- container-fluid -->
       </div>

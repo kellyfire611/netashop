@@ -7,6 +7,9 @@ use App\Models\AclPermission;
 use App\Models\AclUserHasRole;
 use App\Models\AclRoleHasPermission;
 use App\Http\Controllers\Backend\ShopSettingController;
+use App\Http\Controllers\Backend\ShopCategoryController;
+use App\Http\Controllers\Backend\ShopSupplierController;
+use App\Http\Controllers\Backend\ShopProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Backend\ShopPostController;
@@ -40,7 +43,73 @@ Route::post('/logout',
     [LoginController::class, 'logout'])
     ->name('auth.login.logout');
 
+Route::get('generate-password', function() {
+    return bcrypt('123456');
+});
+
 // BACKEND
+// ------ Route liên quan về Chuyên mục sản phẩm
+Route::get('/backend/chuyen-muc-san-pham', 
+    [ShopCategoryController::class, 'index'])
+    ->name('backend.shop_categories.index');
+Route::get('/backend/chuyen-muc-san-pham/them',
+    [ShopCategoryController::class, 'create'])
+    ->name('backend.shop_categories.create');
+Route::post('/backend/chuyen-muc-san-pham/store',
+    [ShopCategoryController::class, 'store'])
+    ->name('backend.shop_categories.store');
+Route::get('/backend/chuyen-muc-san-pham/{id}',
+    [ShopCategoryController::class, 'edit'])
+    ->name('backend.shop_categories.edit');
+Route::put('/backend/chuyen-muc-san-pham/{id}',
+    [ShopCategoryController::class, 'update'])
+    ->name('backend.shop_categories.update');
+Route::delete('/backend/chuyen-muc-san-pham/{id}',
+    [ShopCategoryController::class, 'destroy'])
+    ->name('backend.shop_categories.destroy');
+
+// ------ Route liên quan về Nhà cung cấp
+Route::get('/backend/nha-cung-cap', 
+    [ShopSupplierController::class, 'index'])
+    ->name('backend.shop_suppliers.index');
+Route::get('/backend/nha-cung-cap/them',
+    [ShopSupplierController::class, 'create'])
+    ->name('backend.shop_suppliers.create');
+Route::post('/backend/nha-cung-cap/store',
+    [ShopSupplierController::class, 'store'])
+    ->name('backend.shop_suppliers.store');
+Route::get('/backend/nha-cung-cap/{id}',
+    [ShopSupplierController::class, 'edit'])
+    ->name('backend.shop_suppliers.edit');
+Route::put('/backend/nha-cung-cap/{id}',
+    [ShopSupplierController::class, 'update'])
+    ->name('backend.shop_suppliers.update');
+Route::delete('/backend/nha-cung-cap/{id}',
+    [ShopSupplierController::class, 'destroy'])
+    ->name('backend.shop_suppliers.destroy');
+
+// ------ Route liên quan về Sản phẩm
+Route::get('/backend/san-pham', 
+    [ShopProductController::class, 'index'])
+    ->name('backend.shop_products.index');
+Route::get('/backend/san-pham/them',
+    [ShopProductController::class, 'create'])
+    ->name('backend.shop_products.create');
+Route::post('/backend/san-pham/store',
+    [ShopProductController::class, 'store'])
+    ->name('backend.shop_products.store');
+Route::get('/backend/san-pham/{id}',
+    [ShopProductController::class, 'edit'])
+    ->name('backend.shop_products.edit');
+Route::put('/backend/san-pham/{id}',
+    [ShopProductController::class, 'update'])
+    ->name('backend.shop_products.update');
+Route::delete('/backend/san-pham/{id}',
+    [ShopProductController::class, 'destroy'])
+    ->name('backend.shop_products.destroy');
+
+
+
 // --- Route chức năng Role_has_permissions
 Route::get('/api/v1/acl_role_has_permissions/getByRoleId/{role_id?}',
     [ApiAclRoleHasPermissionController::class, 'getByRoleId'])

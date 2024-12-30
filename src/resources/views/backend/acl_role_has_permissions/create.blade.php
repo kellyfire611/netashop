@@ -5,18 +5,33 @@ Cấp quyền cho vai trò
 @endsection
 
 @section('main-content')
+@php
+// 1. Kiểm tra xem request có query parameter (parameter URL) "role_id" hay không?
+// - Nếu có thì gán giá trị đó cho SELECT chọn VAI TRÒ
+$role_id = request()->query('role_id');
+@endphp
+
 <h1>Cấp quyền cho vai trò</h1>
 
 <form name="frmCreate" method="post" action="{{ route('backend.acl_role_has_permissions.store') }}">
   @csrf
   <div>
     <label for="role_id" class="form-label">Vai trò</label>
-    <select name="role_id" id="role_id" class="form-control">
-      {{-- <option value="">Mời bạn chọn Vai trò</option> --}}
-      @foreach($aclRoles as $r)
-        <option value="{{ $r->id }}">{{ $r->display_name }}</option>
-      @endforeach
-    </select>
+    @if(!empty($role_id))
+      <select name="role_id" id="role_id" class="form-control" disabled>
+        @foreach($aclRoles as $r)
+          <option value="{{ $r->id }}">{{ $r->display_name }}</option>
+        @endforeach
+      </select>
+      <input type="hidden" name="role_id" value="{{ $role_id }}" />
+    @else
+      <select name="role_id" id="role_id" class="form-control">
+        {{-- <option value="">Mời bạn chọn Vai trò</option> --}}
+        @foreach($aclRoles as $r)
+          <option value="{{ $r->id }}">{{ $r->display_name }}</option>
+        @endforeach
+      </select>
+    @endif
   </div>
   <hr />
   <div id="permission_id">
@@ -72,6 +87,11 @@ Cấp quyền cho vai trò
         });
       });
     });
+
+    @if(!empty($role_id))
+      $('#role_id').val({{ $role_id }});
+      $('#role_id').trigger('change');
+    @endif
 
     $('#role_id').trigger('change');
   });

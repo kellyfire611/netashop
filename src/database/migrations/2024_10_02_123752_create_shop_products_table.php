@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('product_code', 50);
             $table->text('product_name', 500);
             $table->text('image');
-            $table->text('short_description', 250);
+            $table->mediumText('short_description');
             $table->mediumText('description');
             $table->decimal('standard_code', 16, 0); //giá niêm yết
             $table->decimal('list_price', 16, 0); //giá nhập

@@ -22,6 +22,7 @@ class AclRoleHasPermission extends Model
     protected $dateFormat = 'Y-m-d H:i:s';
     public $timestamps = false;
 
+    // relationship
     public function role() {
         return $this->belongsTo(AclRole::class,
             'role_id', 'id');
