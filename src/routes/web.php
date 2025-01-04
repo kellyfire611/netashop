@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\ShopSettingController;
 use App\Http\Controllers\Backend\ShopCategoryController;
 use App\Http\Controllers\Backend\ShopSupplierController;
 use App\Http\Controllers\Backend\ShopProductController;
+use App\Http\Controllers\Backend\ShopProductImageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Backend\ShopPostController;
@@ -108,6 +109,25 @@ Route::delete('/backend/san-pham/{id}',
     [ShopProductController::class, 'destroy'])
     ->name('backend.shop_products.destroy');
 
+// ------ Route liên quan về Hình ảnh Sản phẩm 
+Route::get('/backend/hinh-anh-san-pham', 
+    [ShopProductImageController::class, 'index'])
+    ->name('backend.shop_product_images.index');
+Route::get('/backend/hinh-anh-san-pham/them',
+    [ShopProductImageController::class, 'create'])
+    ->name('backend.shop_product_images.create');
+Route::post('/backend/hinh-anh-san-pham/store',
+    [ShopProductImageController::class, 'store'])
+    ->name('backend.shop_product_images.store');
+Route::get('/backend/hinh-anh-san-pham/{id}',
+    [ShopProductImageController::class, 'edit'])
+    ->name('backend.shop_product_images.edit');
+Route::put('/backend/hinh-anh-san-pham/{id}',
+    [ShopProductImageController::class, 'update'])
+    ->name('backend.shop_product_images.update');
+Route::delete('/backend/hinh-anh-san-pham/{id}',
+    [ShopProductImageController::class, 'destroy'])
+    ->name('backend.shop_product_images.destroy');    
 
 
 // --- Route chức năng Role_has_permissions

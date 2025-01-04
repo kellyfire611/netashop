@@ -38,6 +38,9 @@
   <!-- Sweet Alert css-->
   <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 
+  {{-- Dropzone CSS --}}
+  <link href="{{ asset('assets/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css" />
+
   <!-- App Css-->
   <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
   <!-- custom Css-->
@@ -1094,6 +1097,9 @@
 
   <!-- Sweet Alerts js -->
   <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+
+  {{-- Dropzone JS --}}
+  <script src="{{ asset('assets/libs/dropzone/dropzone-min.js') }}"></script>
 
   <!-- Jquery Validation -->
   <script src="{{ asset('assets/libs/jquery-validation/dist/jquery.validate.min.js') }}"></script>
