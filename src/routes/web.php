@@ -18,6 +18,16 @@ use App\Http\Controllers\Backend\AclUserHasRoleController;
 use App\Http\Controllers\Backend\AclRoleHasPermissionController;
 use App\Http\Controllers\Api\AclRoleHasPermissionController as ApiAclRoleHasPermissionController;
 
+use App\Http\Controllers\Frontend\HomeController;
+
+// FRONTEND routes
+Route::get('/', [HomeController::class, 'index'])->name('frontend.index');
+
+
+
+
+
+
 // AUTH
 Route::get('/active-user',
     [RegisterController::class, 'activeUser'])
@@ -119,15 +129,28 @@ Route::get('/backend/hinh-anh-san-pham/them',
 Route::post('/backend/hinh-anh-san-pham/store',
     [ShopProductImageController::class, 'store'])
     ->name('backend.shop_product_images.store');
+
+Route::get('/backend/hinh-anh-san-pham/search',
+    [ShopProductImageController::class, 'search'])
+    ->name('backend.shop_product_images.search');
+
 Route::get('/backend/hinh-anh-san-pham/{id}',
     [ShopProductImageController::class, 'edit'])
     ->name('backend.shop_product_images.edit');
+
 Route::put('/backend/hinh-anh-san-pham/{id}',
     [ShopProductImageController::class, 'update'])
     ->name('backend.shop_product_images.update');
+
 Route::delete('/backend/hinh-anh-san-pham/{id}',
     [ShopProductImageController::class, 'destroy'])
-    ->name('backend.shop_product_images.destroy');    
+    ->name('backend.shop_product_images.destroy');
+
+Route::post('/backend/hinh-anh-san-pham/batch-delete',
+    [ShopProductImageController::class, 'batchDelete'])
+    ->name('backend.shop_product_images.batchDelete');
+
+
 
 
 // --- Route chức năng Role_has_permissions
@@ -215,10 +238,6 @@ Route::delete('/backend/cau-hinh/{id}',
     [ShopSettingController::class, 'destroy'])
     ->name('backend.shop_settings.destroy');
 
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
 Route::get('/test-model-acl-user', function() {
     $lstUsers = AclUser::all();

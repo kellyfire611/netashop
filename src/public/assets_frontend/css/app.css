@@ -1,0 +1,20 @@
+/* div {
+  border: 1px solid red;
+} */
+
+.img-logo {
+  width: 80px
+}
+
+.footer-img-logo {
+  width: 180px;
+}
+
+.footer-slogan-text {
+  font-size: 1rem;
+}
+
+.footer-contact {
+  list-style-type: none;
+  padding: 3px;
+}

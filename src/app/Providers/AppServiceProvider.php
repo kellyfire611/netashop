@@ -8,6 +8,7 @@ use App\Models\AclUser;
 use App\Models\AclPermission;
 use Illuminate\Support\Facades\Gate;
 use App\Policies\ShopPostPolicy;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::defaultView('vendor.pagination.bootstrap-5');
+        Paginator::defaultSimpleView('vendor.pagination.simple-bootstrap-5');
+
         // Sử dụng CustomUserProvider để xác thực tài khoản
         $this->app->auth->provider('custom', function ($app, array $config) {
             return new CustomUserProvider($app['hash'], $config['model']);
