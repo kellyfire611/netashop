@@ -19,6 +19,11 @@ use App\Http\Controllers\Backend\AclRoleHasPermissionController;
 use App\Http\Controllers\Api\AclRoleHasPermissionController as ApiAclRoleHasPermissionController;
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\ErrorController;
+
+// --- Route errors
+Route::get('/errors/403', [ErrorController::class, 'page403'])
+    ->name('errors.403');
 
 // FRONTEND routes
 Route::get('/', [HomeController::class, 'index'])->name('frontend.index');

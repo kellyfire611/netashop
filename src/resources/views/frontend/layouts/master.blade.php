@@ -25,9 +25,7 @@
   @include('frontend.layouts.partials.header')
 
   <main>
-    <div class="container">
-      @yield('content')
-    </div>
+    @yield('content')
   </main>
 
   @include('frontend.layouts.partials.footer')

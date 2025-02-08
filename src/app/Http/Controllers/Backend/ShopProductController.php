@@ -172,7 +172,7 @@ class ShopProductController extends Controller
             $deletingModel->delete();
         }
 
-         // Điều hướng về route index
-         return redirect(route('backend.shop_products.index'));
+        // Điều hướng về route index
+        return redirect(route('backend.shop_products.index'));
     }
 }
